@@ -1,5 +1,6 @@
 ---
 title: Vue服务端渲染
+cover: /img/thumbnail/study/client/vue/vue_ssr.png
 thumbnail: /img/thumbnail/study/client/vue/vue_ssr.png
 date: 2021-04-09 15:43:19
 updated: 2021-04-13 15:43:19
