@@ -16,7 +16,7 @@ tags: docker
 
 [菜鸟教程](https://www.runoob.com/docker/docker-tutorial.html)
 [官网](https://www.docker.com/get-started)
-
+<!--more-->
 ## vue3部署
 
 1. 先执行npm run build打包
