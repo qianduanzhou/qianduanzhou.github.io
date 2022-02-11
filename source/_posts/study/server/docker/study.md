@@ -27,7 +27,7 @@ tags: docker
 
 参考菜鸟教程，记得创建对应数据库
 
-[docker-mysql]: https://www.runoob.com/docker/docker-install-mysql.html	"创建mysql映像及容器"
+[docker-mysql](https://www.runoob.com/docker/docker-install-mysql.html "创建mysql映像及容器")
 
 ## beego部署
 
@@ -45,4 +45,4 @@ docker network create -d bridge 网络名称
 
 Compose 是用于定义和运行多容器 Docker 应用程序的工具。
 
-[docker compose]: https://www.runoob.com/docker/docker-compose.html	"docker compose"
+[docker compose](https://www.runoob.com/docker/docker-compose.html "docker compose")
