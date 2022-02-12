@@ -8,7 +8,6 @@ toc: true
 categories: 
 - study
 - client
-- vue
 tags: 
 - vue
 - ssr

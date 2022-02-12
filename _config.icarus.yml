@@ -246,11 +246,6 @@ widgets:
             # # RSS:
             #     icon: fas fa-rss
             #     url: /
-    # Recent posts widget configurations
-    -
-        # Where should the widget be placed, left sidebar or right sidebar
-        position: right
-        type: recent_posts
     # Table of contents widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar
@@ -262,6 +257,11 @@ widgets:
         collapsed: true
         # Maximum level of headings to show (1-6)
         depth: 3
+    # Recent posts widget configurations
+    -
+        # Where should the widget be placed, left sidebar or right sidebar
+        position: right
+        type: recent_posts
     # Categories widget configurations
     -
         # Where should the widget be placed, left sidebar or right sidebar

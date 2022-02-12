@@ -2,13 +2,12 @@
 title: docker学习
 cover: /img/thumbnail/study/server/docker/docker.png
 thumbnail: /img/thumbnail/study/server/docker/docker.png
-date: 2021-12-17 15:43:19
-updated: 2021-12-17 15:43:19
+date: 2021-12-17 10:55:09
+updated: 2021-12-17 10:55:09
 toc: true
 categories: 
 - study
 - server
-- docker
 tags: docker
 ---
 
