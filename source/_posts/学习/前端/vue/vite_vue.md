@@ -2,8 +2,8 @@
 title: vite搭建ts版vue3移动端基础框架
 cover: /img/thumbnail/学习/前端/vue/vite.png
 thumbnail: /img/thumbnail/学习/前端/vue/vite.png
-date: 2022-01-25 11:34:50
-updated: 2022-01-25 11:34:50
+date: 2021-12-17 13:35:43
+updated: 2021-12-17 17:40:50
 toc: true
 categories: 
 - 学习
@@ -11,7 +11,7 @@ categories:
 tags: 
 - vue
 - vite
-- typescript
+- typeScript
 ---
 ## 总览
 
@@ -81,7 +81,7 @@ export default defineConfig(({mode}) => {
     '@': _resolve('./src'),
    },
   },
-  后端: {
+  server: {
    proxy: {
     '/local': {
      target: env.VITE_NORMALURL,

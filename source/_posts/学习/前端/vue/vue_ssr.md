@@ -126,7 +126,7 @@ nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期�
 ##### asyncData
 
 - 这个钩子在客户端和服务端都会执行，它可以是异步的，并接收上下文作为参数。返回的对象将与data对象合并。由于这个方法是在组件初始化之前被调用的，所以无法通过this来使用组件的方法和属性。
-- 第一次加载页面时会先执行这个钩子，所有在这个时候不能使用document等客户端的对象和方法，否则会报错。由于除了页面刷新加载会执行这个钩子，在路由跳转或者组件生成时也会执行，所以需要通过process.后端参数判断当前环境。
+- 第一次加载页面时会先执行这个钩子，所有在这个时候不能使用document等客户端的对象和方法，否则会报错。由于除了页面刷新加载会执行这个钩子，在路由跳转或者组件生成时也会执行，所以需要通过process.server参数判断当前环境。
 - 在服务端调用时，即页面刷新时，会等待promise状态完成后才会继续执行接下来的生命周期钩子。
 
 ##### fetch
@@ -150,7 +150,7 @@ nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期�
 
 在开始之前，首先需要准备的条件有：
 
-- vue & vue-后端-renderer 2.3.0+
+- vue & vue-server-renderer 2.3.0+
 - vue-router 2.5.0+
 - vue-loader 12.0.0+ & vue-style-loader 3.0.0+
 - vuex
@@ -160,15 +160,15 @@ nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期�
 #### 起步
 
 - 我们可以新建一个文件夹如vue-ssr,然后打开终端执行npm init生成package.json文件
-- 然后先安装vue与vue-后端-renderer和express进行测试（npm install vue vue-后端-renderer express --save）
-- 新建一个文件夹后端.js
+- 然后先安装vue与vue-server-renderer和express进行测试（npm install vue vue-server-renderer express --save）
+- 新建一个文件夹server.js
 
 ```js
 const Vue = require('vue')
-const 后端 = require('express')()
-const renderer = require('vue-后端-renderer').createRenderer()
+const server = require('express')()
+const renderer = require('vue-server-renderer').createRenderer()
 
-后端.get('*', (req, res) => {
+server.get('*', (req, res) => {
   const app = new Vue({
     data: {
       url: req.url
@@ -178,7 +178,7 @@ const renderer = require('vue-后端-renderer').createRenderer()
 
   renderer.renderToString(app, (err, html) => {
     if (err) {
-      res.status(500).end('Internal 后端 Error')
+      res.status(500).end('Internal Server Error')
       return
     }
     res.setHeader("Content-type","text/html;charset=utf8");
@@ -192,7 +192,7 @@ const renderer = require('vue-后端-renderer').createRenderer()
   })
 })
 
-后端.listen(8080)
+server.listen(8080)
 ```
 
 这段代码的作用其实就是先创建一个vue实例，再创建一个renderer，通过renderer的renderToString方法将vue实例渲染为html，最后通过express创建的服务器，访问url后响应html到浏览器上
@@ -221,17 +221,17 @@ const renderer = require('vue-后端-renderer').createRenderer()
 </html>
 ```
 
-后端.js修改为：
+server.js修改为：
 
 ```
 const Vue = require('vue')
-const 后端 = require('express')()
+const server = require('express')()
 const template = require('fs').readFileSync('./index.template.html', 'utf-8')
-const renderer = require('vue-后端-renderer').createRenderer({
+const renderer = require('vue-server-renderer').createRenderer({
     template
 })
 
-后端.get('*', (req, res) => {
+server.get('*', (req, res) => {
     const app = new Vue({
         data: {
             url: req.url
@@ -246,7 +246,7 @@ const renderer = require('vue-后端-renderer').createRenderer({
     renderer.renderToString(app, context, (err, html) => {
         if (err) {
             console.log('err',err)
-            res.status(500).end('Internal 后端 Error')
+            res.status(500).end('Internal Server Error')
             return
         }
         res.setHeader("Content-type", "text/html;charset=utf8");
@@ -254,7 +254,7 @@ const renderer = require('vue-后端-renderer').createRenderer({
     })
 })
 
-后端.listen(8080)
+server.listen(8080)
 ```
 
 #### 编写通用代码
@@ -283,7 +283,7 @@ module.exports = function createApp(context) {
 
 2. 创建客户端入口
 
-新建文件entry.前端.js,客户端 entry 只需创建应用程序，并且将其挂载到 DOM 中：
+新建文件entry.client.js,客户端 entry 只需创建应用程序，并且将其挂载到 DOM 中：
 
 ```js
 import { createApp } from './app';
@@ -293,7 +293,7 @@ app.$mount('#app')
 
 3. 创建服务端入口
 
-新建文件entry-后端.js，服务端入口导出一个函数，每次渲染都会重复调用此函数，之后我们将在此做服务端路由匹配和数据预取逻辑。
+新建文件entry-server.js，服务端入口导出一个函数，每次渲染都会重复调用此函数，之后我们将在此做服务端路由匹配和数据预取逻辑。
 
 ```
 import { createApp } from './app';
@@ -344,7 +344,7 @@ export function createApp () {
 
 (2) 处理服务端与客户端入口文件
 
-我们先对entry.后端.js文件加入对路由逻辑的处理，目的是根据url匹配路由，因为有可能是异步路由，如路由懒加载，所以需要使用onReady等待异步路由加载完成。
+我们先对entry.server.js文件加入对路由逻辑的处理，目的是根据url匹配路由，因为有可能是异步路由，如路由懒加载，所以需要使用onReady等待异步路由加载完成。
 
 ```js
 import { createApp } from './app'
@@ -370,7 +370,7 @@ export default context => {
 
 然后我们对客户端入口文件进行处理
 
-需要注意的是，你仍然需要在挂载 app 之前调用 router.onReady，因为路由器必须要提前解析路由配置中的异步组件，才能正确地调用组件中可能存在的路由钩子。这一步我们已经在我们的服务器入口 (后端 entry) 中实现过了，现在我们只需要更新客户端入口 (前端 entry)：
+需要注意的是，你仍然需要在挂载 app 之前调用 router.onReady，因为路由器必须要提前解析路由配置中的异步组件，才能正确地调用组件中可能存在的路由钩子。这一步我们已经在我们的服务器入口 (server entry) 中实现过了，现在我们只需要更新客户端入口 (client entry)：
 
 ```js
 import { createApp } from './app'|
@@ -496,11 +496,11 @@ Vue.mixin((
 如果你检查服务器渲染的输出结果，你会注意到应用程序的根元素上添加了一个特殊的属性：
 
 ```
-<div id="app" data-后端-rendered="true">
+<div id="app" data-server-rendered="true">
 ```
 
-data-后端-rendered 特殊属性，让客户端 Vue 知道这部分 HTML 是由 Vue 在服务端渲染的，并且应该以激活模式进行挂载。注意，这里并没有添加 id="app"，而是添加 data-后端-rendered 属性：你需要自行添加 ID 或其他能够选取到应用程序根元素的选择器，否则应用程序将无法正常激活。
-注意，在没有 data-后端-rendered 属性的元素上，还可以向 $mount 函数的 hydrating 参数位置传入 true，来强制使用激活模式(hydration)：
+data-server-rendered 特殊属性，让客户端 Vue 知道这部分 HTML 是由 Vue 在服务端渲染的，并且应该以激活模式进行挂载。注意，这里并没有添加 id="app"，而是添加 data-server-rendered 属性：你需要自行添加 ID 或其他能够选取到应用程序根元素的选择器，否则应用程序将无法正常激活。
+注意，在没有 data-server-rendered 属性的元素上，还可以向 $mount 函数的 hydrating 参数位置传入 true，来强制使用激活模式(hydration)：
 
 ```js
 app.$mount('#app', true)
@@ -508,7 +508,7 @@ app.$mount('#app', true)
 
 #### 构建配置
 
-在完成两个入口的配置后，接下来就开始用webpack搭建基础框架了。服务器端渲染 (SSR) 项目的配置大体上与纯客户端项目类似，但是我们建议将配置分为三个文件：base, 前端 和 后端。基本配置 (base config) 包含在两个环境共享的配置，例如，输出路径 (output path)，别名 (alias) 和 loader。服务器配置 (后端 config) 和客户端配置 (前端 config)，可以通过使用 webpack-merge 来简单地扩展基本配置。
+在完成两个入口的配置后，接下来就开始用webpack搭建基础框架了。服务器端渲染 (SSR) 项目的配置大体上与纯客户端项目类似，但是我们建议将配置分为三个文件：base, client 和 server。基本配置 (base config) 包含在两个环境共享的配置，例如，输出路径 (output path)，别名 (alias) 和 loader。服务器配置 (server config) 和客户端配置 (client config)，可以通过使用 webpack-merge 来简单地扩展基本配置。
 
 - webpack.base.config.js文件
 
@@ -595,9 +595,9 @@ module.exports = config
 
 期间需要安装一些插件，如vue-loader，babel-loader，url-loader来分别处理vue文件，js文件和一些图片及字体图标文件。
 
-- webpack.前端.config.js文件
+- webpack.client.config.js文件
 
-这是一个处理客户端入口的webpack配置文件，在这个文件需要引入一个比较关键的插件vue-后端-renderer/前端-plugin，其实就是我们之前渲染模板的插件下的一个js文件，用于处理入口文件并生成vue-ssr-前端-manifest.json文件，之后会引入到node的后端文件中。
+这是一个处理客户端入口的webpack配置文件，在这个文件需要引入一个比较关键的插件vue-server-renderer/client-plugin，其实就是我们之前渲染模板的插件下的一个js文件，用于处理入口文件并生成vue-ssr-client-manifest.json文件，之后会引入到node的server文件中。
 
 具体配置：
 
@@ -608,11 +608,11 @@ const {
 	merge
 } = require('webpack-merge')
 const baseConfig = require('./webpack.base.config.js')
-const VueSSR前端Plugin = require('vue-后端-renderer/前端-plugin')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 let config = merge(baseConfig, {
 	entry: {
-		app: '/src/entry-前端.js'
+		app: '/src/entry-client.js'
 	},
 	optimization: {
 		splitChunks: {
@@ -655,10 +655,10 @@ let config = merge(baseConfig, {
 		}]
 	},
 	plugins: [
-		new VueSSR前端Plugin(),
+		new VueSSRClientPlugin(),
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-			'process.env.VUE_ENV': "'前端'"
+			'process.env.VUE_ENV': "'client'"
 		})
 	]
 })
@@ -672,9 +672,9 @@ module.exports = config
 
 在这里也会随便做一些打包优化，由于使用的webpack版本是4.x，所以js打包优化使用optimization下的splitChunks配置，3.x之前是使用CommonsChunkPlugin插件进行分包，css文件抽离也从extract-text-webpack-plugin插件换成extract-text-webpack-plugin插件。
 
-- webpack.后端.config.js文件
+- webpack.server.config.js文件
 
-后端的配置文件则主要用到vue-后端-renderer插件下的sever-plugin文件，用于生成服务端的vue-ssr-后端-bundle.json文件，之后也会在node的后端文件中使用。
+server的配置文件则主要用到vue-server-renderer插件下的sever-plugin文件，用于生成服务端的vue-ssr-server-bundle.json文件，之后也会在node的server文件中使用。
 需要注意的点：由于我们使用mini-css-extract-plugin插件进行css文件抽离，但是这个插件在服务端使用会报错，因为使用到了document 等客户端的全局参数，所有我们在处理css文件时需要分成服务端和客户端两个loader处理。还有就是使用vue-style-loader代替style-loader，因为vue-style-loader多了些对服务端渲染的处理：
 
 1. 客户端和服务器端的通用编程体验。
@@ -688,10 +688,10 @@ const {
 } = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
 const baseConfig = require('./webpack.base.config.js')
-const VueSSR后端Plugin = require('vue-后端-renderer/后端-plugin')
+const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 
 module.exports = merge(baseConfig, {
-    entry: '/src/entry-后端.js',
+    entry: '/src/entry-server.js',
     target: 'node',
     devtool: 'source-map',
     output: {
@@ -712,10 +712,10 @@ module.exports = merge(baseConfig, {
     },
 
     plugins: [
-        new VueSSR后端Plugin(),
+        new VueSSRServerPlugin(),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-            'process.env.VUE_ENV': "'后端'"
+            'process.env.VUE_ENV': "'server'"
         }),
     ]
 })
@@ -725,9 +725,9 @@ module.exports = merge(baseConfig, {
 
 因为现在这个脚手架如果代码有改动，每次都需要重新build一遍，然后再start，开发起来比较麻烦，所有我们要配置下开发环境，使用热重载。
 
-- setup-dev-后端.js文件
+- setup-dev-server.js文件
 
-在build文件夹下新建一个setup-dev-后端.js，当做开发环境的配置文件，在这个文件里需要引入服务端和客户端的两个配置文件，然后安装webpack-dev-middleware和webpack-hot-middleware来使用热重载，监听文件变化然后触发热重载。
+在build文件夹下新建一个setup-dev-server.js，当做开发环境的配置文件，在这个文件里需要引入服务端和客户端的两个配置文件，然后安装webpack-dev-middleware和webpack-hot-middleware来使用热重载，监听文件变化然后触发热重载。
 
 完整的代码：
 
@@ -737,31 +737,31 @@ const path = require('path')
 const MFS = require('memory-fs')//操作内存的文件系统
 const webpack = require('webpack')
 const chokidar = require('chokidar')//封装 Node.js 监控文件系统文件变化功能的库
-const 前端Config = require('./webpack.前端.config')
-const 后端Config = require('./webpack.后端.config')
+const clientConfig = require('./webpack.client.config')
+const serverConfig = require('./webpack.server.config')
 const mfs = new MFS()
 const writeRouter = require('../fs/index')
 const renderRouter = process.env.RENDER_ROUTER === 'true'//是否执行动态路由表
 const readFile = (fs, file) => {
   try {
-    return fs.readFileSync(path.join(前端Config.output.path, file), 'utf-8')
+    return fs.readFileSync(path.join(clientConfig.output.path, file), 'utf-8')
   } catch (e) {}
 }
 let isFirstRender = true //判断是否是第一次渲染，由于chokidar监听add事件第一次会监听所有文件的新增，所有需要排除掉第一次
-module.exports = function setupDev后端 (app, templatePath, cb) {
+module.exports = function setupDevServer (app, templatePath, cb) {
   let bundle
   let template
-  let 前端Manifest
+  let clientManifest
 
   let ready
   const readyPromise = new Promise(r => { ready = r })
   const update = () => {
-    if (bundle && 前端Manifest) {//文件更新后且两个文件存在时resolve，并执行回调
+    if (bundle && clientManifest) {//文件更新后且两个文件存在时resolve，并执行回调
       ready()
       isFirstRender = false
       cb(bundle, {
         template,
-        前端Manifest
+        clientManifest
       })
     }
   }
@@ -789,51 +789,51 @@ module.exports = function setupDev后端 (app, templatePath, cb) {
    * https://github.com/webpack-contrib/webpack-hot-middleware
    * 添加热重载及相关参数 noInfo：不输出相关信息 reload：自动更新
    */
-  前端Config.entry.app = ['webpack-hot-middleware/前端?noInfo=true&reload=true', 前端Config.entry.app]
-  前端Config.output.filename = '[name].js'
-  前端Config.plugins.push(
+  clientConfig.entry.app = ['webpack-hot-middleware/client?noInfo=true&reload=true', clientConfig.entry.app]
+  clientConfig.output.filename = '[name].js'
+  clientConfig.plugins.push(
     // new webpack.optimize.OccurrenceOrderPlugin(),//webpack 1.x
     new webpack.HotModuleReplacementPlugin(),//启用热重载
     // new webpack.NoEmitOnErrorsPlugin()//webpack 1.x
   )
 
   // dev middleware
-  const 前端Compiler = webpack(前端Config)
+  const clientCompiler = webpack(clientConfig)
   /**
    * 使用该插件修改文件时无需重新编译，一般配合webpack-hot-middleware实现热重载
    * https://www.npmjs.com/package/webpack-dev-middleware
    */
-  const devMiddleware = require('webpack-dev-middleware')(前端Compiler, {
-    publicPath: 前端Config.output.publicPath,//绑定中间件的公共路径,与webpack配置的路径相同
+  const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
+    publicPath: clientConfig.output.publicPath,//绑定中间件的公共路径,与webpack配置的路径相同
     // quiet: true,//向控制台显示任何内容 
     noInfo: true//显示无信息到控制台（仅警告和错误） 
   })
 
   //使用webpack-dev-middleware中间件
   app.use(devMiddleware)
-  前端Compiler.plugin('done', stats => {//在成功构建并且输出了文件后，Webpack 即将退出时发生；
+  clientCompiler.plugin('done', stats => {//在成功构建并且输出了文件后，Webpack 即将退出时发生；
     stats = stats.toJson()
     stats.errors.forEach(err => console.error(err))
     stats.warnings.forEach(err => console.warn(err))
     if (stats.errors.length) return
-    前端Manifest = JSON.parse(readFile(
+    clientManifest = JSON.parse(readFile(
       devMiddleware.fileSystem,
-      'vue-ssr-前端-manifest.json'
+      'vue-ssr-client-manifest.json'
     ))
     update()
   })
   
   //使用热重载中间件
-  app.use(require('webpack-hot-middleware')(前端Compiler))
+  app.use(require('webpack-hot-middleware')(clientCompiler))
 
-  const 后端Compiler = webpack(后端Config)
-  后端Compiler.outputFileSystem = mfs //将后端Compiler的文件系统改成内存系统
-  后端Compiler.watch({}, (err, stats) => {//当文件发生改变时执行
+  const serverCompiler = webpack(serverConfig)
+  serverCompiler.outputFileSystem = mfs //将serverCompiler的文件系统改成内存系统
+  serverCompiler.watch({}, (err, stats) => {//当文件发生改变时执行
     if (err) throw err
     stats = stats.toJson()
     if (stats.errors.length) return
     // read bundle generated by vue-ssr-webpack-plugin
-    bundle = JSON.parse(readFile(mfs, 'vue-ssr-后端-bundle.json'))
+    bundle = JSON.parse(readFile(mfs, 'vue-ssr-server-bundle.json'))
     update()
   })
 
@@ -841,9 +841,9 @@ module.exports = function setupDev后端 (app, templatePath, cb) {
 }
 ```
 
-- 修改后端文件
+- 修改server文件
 
-我们需要对后端文件进行修改，判断正式环境和测试环境，分别执行不同的方法，当前是测试环境时，执行setup-dev-后端导出的setupDev后端方法，该方法返回一个promise，在服务端和客户端文件重新构建完成后resolve，之后再触发render方法，执行renderToString方法返回html给客户端，从而实现开发环境热重载。
+我们需要对server文件进行修改，判断正式环境和测试环境，分别执行不同的方法，当前是测试环境时，执行setup-dev-server导出的setupDevServer方法，该方法返回一个promise，在服务端和客户端文件重新构建完成后resolve，之后再触发render方法，执行renderToString方法返回html给客户端，从而实现开发环境热重载。
 
 完整代码：
 
@@ -857,13 +857,13 @@ const writeRouter = require('../fs/index')
  * 服务端渲染的关键
  * https://ssr.vuejs.org/zh/api/
  */
-const { createBundleRenderer } = require('vue-后端-renderer')
+const { createBundleRenderer } = require('vue-server-renderer')
 
 const resolve = file => path.resolve(__dirname, file)
 const templatePath = resolve('../src/index.template.html')
-const 后端Info =
+const serverInfo =
   `express/${require('express/package.json').version} ` +
-  `vue-后端-renderer/${require('vue-后端-renderer/package.json').version}`
+  `vue-server-renderer/${require('vue-server-renderer/package.json').version}`
 const isProd = process.env.NODE_ENV === 'production'//判断是否是生成环境
 const renderRouter = process.env.RENDER_ROUTER === 'true'//是否执行动态路由表
 
@@ -876,21 +876,21 @@ const serve = (path, cache) => express.static(resolve(path), {
 let readyPromise,renderer
 if(isProd) {
   const template = require('fs').readFileSync(templatePath, 'utf-8')
-  const 后端Bundle = require(resolve('../dist/vue-ssr-后端-bundle.json'))
-  const 前端Manifest = require(resolve('../dist/vue-ssr-前端-manifest.json'))
+  const serverBundle = require(resolve('../dist/vue-ssr-server-bundle.json'))
+  const clientManifest = require(resolve('../dist/vue-ssr-client-manifest.json'))
   /**
    * 第一个参数可以是以下之一：
    * 绝对路径，指向一个已经构建好的 bundle 文件（.js 或 .json）。必须以 / 开头才会被识别为文件路径。
-   * webpack + vue-后端-renderer/后端-plugin 生成的 bundle 对象。
+   * webpack + vue-server-renderer/server-plugin 生成的 bundle 对象。
    * JavaScript 代码字符串（不推荐）。
    */
-  renderer = createRenderer(后端Bundle, {
+  renderer = createRenderer(serverBundle, {
     runInNewContext: false,//bundle 代码将与服务器进程在同一个 global 上下文中运行，所以请留意在应用程序代码中尽量避免修改 global。
     template,//模板
-    前端Manifest//由 vue-后端-renderer/前端-plugin 生成的客户端构建 manifest 对象
+    clientManifest//由 vue-server-renderer/client-plugin 生成的客户端构建 manifest 对象
   })
 } else {
-  readyPromise = require(resolve('../build/setup-dev-后端'))(
+  readyPromise = require(resolve('../build/setup-dev-server'))(
     app,
     templatePath,
     (bundle, options) => {
@@ -899,14 +899,14 @@ if(isProd) {
   )
 }
 function createRenderer (bundle, options) {
-  // https://github.com/vuejs/vue/blob/dev/packages/vue-后端-renderer/README.md#why-use-bundlerenderer
+  // https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
   return createBundleRenderer(bundle, options)
 }
 function render (req, res) {
   const s = Date.now()
 
   res.setHeader("Content-Type", "text/html")
-  res.setHeader("后端", 后端Info)
+  res.setHeader("Server", serverInfo)
 
   const handleError = err => {
     if (err.url) {
@@ -915,7 +915,7 @@ function render (req, res) {
       res.status(404).send('404 | Page Not Found')
     } else {
       // Render Error Page or Redirect
-      res.status(500).send('500 | Internal 后端 Error')
+      res.status(500).send('500 | Internal Server Error')
       console.error(`error during render : ${req.url}`)
       console.error(err.stack)
     }
@@ -926,7 +926,7 @@ function render (req, res) {
     url: req.url
   }
   /**
-   * renderToString将context传递给entry-后端，
+   * renderToString将context传递给entry-server，
    * vue实例挂载的内容变成html，返回给客户端
    */
   renderer.renderToString(context, (err, html) => {
@@ -948,7 +948,7 @@ app.get('*', isProd ? render : (req, res) => {
 }
 )
 app.listen(8080, () => {
-  console.log(`后端 started at localhost: 8080`)
+  console.log(`server started at localhost: 8080`)
 })
 ```
 
@@ -958,13 +958,13 @@ app.listen(8080, () => {
 
 ```js
  "scripts": {
-    "dev": "cross-env RENDER_ROUTER=false node 后端/index",
-    "start": "cross-env NODE_ENV=production node 后端/index",
-    "build": "rimraf dist && npm run build:前端 && npm run build:后端",
-    "build:renderRouter": "cross-env FIRST_RENDER=true node fs/index && rimraf dist && npm run build:前端 && npm run build:后端",
-    "build:前端": "cross-env NODE_ENV=production webpack --config build/webpack.前端.config.js --progress",
-    "build:后端": "cross-env NODE_ENV=production webpack --config build/webpack.后端.config.js --progress",
-    "build:analyzer": "cross-env NODE_ENV=production ANALYZER=true webpack --config build/webpack.前端.config.js --progress"
+    "dev": "cross-env RENDER_ROUTER=false node server/index",
+    "start": "cross-env NODE_ENV=production node server/index",
+    "build": "rimraf dist && npm run build:client && npm run build:server",
+    "build:renderRouter": "cross-env FIRST_RENDER=true node fs/index && rimraf dist && npm run build:client && npm run build:server",
+    "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress",
+    "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress",
+    "build:analyzer": "cross-env NODE_ENV=production ANALYZER=true webpack --config build/webpack.client.config.js --progress"
   },
 ```
 
@@ -974,7 +974,7 @@ app.listen(8080, () => {
 
 - start
 
-该命令传入一个参数NODE_ENV=production来设置node环境变量，在node进程中的文件使用process.env.production可以访问该参数的值，用于判断当前环境。然后执行node 后端启动。不过在前提下需要先执行npm run build命令，打包生成服务端和客户端的json文件，才可以启动。
+该命令传入一个参数NODE_ENV=production来设置node环境变量，在node进程中的文件使用process.env.production可以访问该参数的值，用于判断当前环境。然后执行node server启动。不过在前提下需要先执行npm run build命令，打包生成服务端和客户端的json文件，才可以启动。
 
 - build
 
