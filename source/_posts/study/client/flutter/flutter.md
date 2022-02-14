@@ -11,4 +11,4 @@ categories:
 tags: flutter
 ---
 ## 一个简单的app
-[demo](https://github.com/qianduanzhou/flutter_myapp)
+[简单的flutter应用](https://github.com/qianduanzhou/flutter_myapp)

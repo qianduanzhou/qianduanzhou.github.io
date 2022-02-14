@@ -32,7 +32,7 @@ Nuxt.js 是一个基于 Vue.js 的通用应用框架。通过对客户端/服务
 
 [demo](https://github.com/qianduanzhou/nuxt-demo "demo地址")
 
-- 脚手架搭建
+- 脚手架搭建,
 
 **基础：vue、webpack、node**
 
