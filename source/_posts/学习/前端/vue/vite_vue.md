@@ -1,13 +1,13 @@
 ---
 title: vite搭建ts版vue3移动端基础框架
-cover: /img/thumbnail/study/client/vue/vite.png
-thumbnail: /img/thumbnail/study/client/vue/vite.png
+cover: /img/thumbnail/学习/前端/vue/vite.png
+thumbnail: /img/thumbnail/学习/前端/vue/vite.png
 date: 2022-01-25 11:34:50
 updated: 2022-01-25 11:34:50
 toc: true
 categories: 
-- study
-- client
+- 学习
+- 前端
 tags: 
 - vue
 - vite
@@ -81,7 +81,7 @@ export default defineConfig(({mode}) => {
     '@': _resolve('./src'),
    },
   },
-  server: {
+  后端: {
    proxy: {
     '/local': {
      target: env.VITE_NORMALURL,
@@ -269,7 +269,7 @@ class ImgLazyLoad {
         return () => {
             let deleteIndexList: Array<number> = []
             this.imgList.forEach((img: any, index: number) => {
-                let rect = img.getBoundingClientRect()
+                let rect = img.getBounding前端Rect()
                 if (rect.top < window.innerHeight) {//滚动到视图内触发
                     img.src = img.dataset.src
                     deleteIndexList.push(index)

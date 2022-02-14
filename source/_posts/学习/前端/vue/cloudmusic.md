@@ -1,13 +1,13 @@
 ---
 title: vue+electron高仿网易云
-cover: /img/thumbnail/study/client/vue/cloudmusic.jpg
-thumbnail: /img/thumbnail/study/client/vue/cloudmusic.jpg
+cover: /img/thumbnail/学习/前端/vue/cloudmusic.jpg
+thumbnail: /img/thumbnail/学习/前端/vue/cloudmusic.jpg
 date: 2019-06-13 09:44:00
 updated: 2019-06-13 09:44:00
 toc: true
 categories: 
-- study
-- client
+- 学习
+- 前端
 tags: 
 - vue
 - electron

@@ -1,13 +1,13 @@
 ---
 title: npm发包流程
-cover: /img/thumbnail/study/client/npm/npm.png
-thumbnail: /img/thumbnail/study/client/npm/npm.png
+cover: /img/thumbnail/学习/前端/npm/npm.png
+thumbnail: /img/thumbnail/学习/前端/npm/npm.png
 date: 2022-01-25 11:34:50
 updated: 2022-01-25 11:34:50
 toc: true
 categories: 
-- study
-- client
+- 学习
+- 前端
 tags: npm
 ---
 ### npm发布包相关操作

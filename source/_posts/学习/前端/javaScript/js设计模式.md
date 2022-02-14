@@ -1,13 +1,13 @@
 ---
 title: js设计模式
-cover: /img/thumbnail/study/client/javaScript/js.png
-thumbnail: /img/thumbnail/study/client/javaScript/js.png
+cover: /img/thumbnail/学习/前端/javaScript/js.png
+thumbnail: /img/thumbnail/学习/前端/javaScript/js.png
 date: 2021-08-16 21:21:10
 updated: 2021-08-16 21:21:10
 toc: true
 categories: 
-- study
-- client
+- 学习
+- 前端
 tags: 
 - javaScript
 ---
