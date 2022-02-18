@@ -18,9 +18,9 @@ Hook 是 React 16.8 的新增特性。它可以让你在不编写 class 的情�
 
 <!--more-->
 
-## State Hook
+## <font color=#a862ea>State Hook</font>
 
-### 声明 State 变量
+### <font color=#a862ea>声明 State 变量</font>
 
 在 class 中，我们通过在构造函数中设置 `this.state` 为 `{ count: 0 }` 来初始化 `count` state 为 `0`：
 
@@ -44,7 +44,7 @@ function Example() {
 
 我们声明了一个叫 `count` 的 state 变量，然后把它设为 `0`。React 会在重复渲染时记住它当前的值，并且提供最新的值给我们的函数。我们可以通过调用 `setCount` 来更新当前的 `count`。
 
-### 读取 State
+### <font color=#a862ea>读取 State</font>
 
 当我们想在 class 中显示当前的 count，我们读取 `this.state.count`：
 
@@ -58,7 +58,7 @@ function Example() {
   <p>You clicked {count} times</p>
 ```
 
-### 更新 State
+### <font color=#a862ea>更新 State</font>
 
 在 class 中，我们需要调用 `this.setState()` 来更新 `count` 值：
 
@@ -76,7 +76,7 @@ function Example() {
   </button>
 ```
 
-## Effect Hook
+## <font color=#a862ea>Effect Hook</font>
 
 *Effect Hook* 可以让你在函数组件中执行副作用操作
 
@@ -109,11 +109,11 @@ function Example() {
 
 在 React 组件中有两种常见副作用操作：需要清除的和不需要清除的。
 
-### 无需清除的 effect
+### <font color=#a862ea>无需清除的 effect</font>
 
 有时候，我们只想**在 React 更新 DOM 之后运行一些额外的代码。**比如发送网络请求，手动变更 DOM，记录日志，这些都是常见的无需清除的操作。因为我们在执行完这些操作之后，就可以忽略他们了。让我们对比一下使用 class 和 Hook 都是怎么实现这些副作用的。
 
-#### 使用 class 的示例
+#### <font color=#a862ea>使用 class 的示例</font>
 
 这是一个 React 计数器的 class 组件。它在 React 对 DOM 进行操作之后，立即更新了 document 的 title 属性
 
@@ -142,7 +142,7 @@ class Example extends React.Component {
 
 注意，**在这个 class 中，我们需要在两个生命周期函数中编写重复的代码。**
 
-#### 使用 Hook 的示例
+#### <font color=#a862ea>使用 Hook 的示例</font>
 
 ```jsx
 import React, { useState, useEffect } from 'react';
@@ -163,11 +163,11 @@ function Example() {
 
 **`useEffect` 默认情况下，在第一次渲染之后*和*每次更新之后都会执行。**
 
-### 需要清除的 effect
+### <font color=#a862ea>需要清除的 effect</font>
 
 之前，我们研究了如何使用不需要清除的副作用，还有一些副作用是需要清除的。例如**订阅外部数据源**。这种情况下，清除工作是非常重要的，可以防止引起内存泄露！现在让我们来比较一下如何用 Class 和 Hook 来实现。
 
-#### 使用 Class 的示例
+#### <font color=#a862ea>使用 Class 的示例</font>
 
 在 React class 中，你通常会在 `componentDidMount` 中设置订阅，并在 `componentWillUnmount` 中清除它。例如，假设我们有一个 `ChatAPI` 模块，它允许我们订阅好友的在线状态。以下是我们如何使用 class 订阅和显示该状态：
 
@@ -191,7 +191,7 @@ class FriendStatus extends React.Component {
 
 你会注意到 `componentDidMount` 和 `componentWillUnmount` 之间相互对应。使用生命周期函数迫使我们拆分这些逻辑代码，即使这两部分代码都作用于相同的副作用。
 
-#### 使用 Hook 的示例
+#### <font color=#a862ea>使用 Hook 的示例</font>
 
 如果你的 effect 返回一个函数，React 将会在执行清除操作时调用它：
 
@@ -221,7 +221,7 @@ function FriendStatus(props) {
 
 **React 何时清除 effect？** React 会在组件卸载的时候执行清除操作。
 
-### 通过跳过 Effect 进行性能优化
+### <font color=#a862ea>通过跳过 Effect 进行性能优化</font>
 
 在某些情况下，每次渲染后都执行清理或者执行 effect 可能会导致性能问题。在 class 组件中，我们可以通过在 `componentDidUpdate` 中添加对 `prevProps` 或 `prevState` 的比较逻辑解决：
 
@@ -241,24 +241,24 @@ useEffect(() => {
 }, [count]); // 仅在 count 更改时更新
 ```
 
-## Hook 规则
+## <font color=#a862ea>Hook 规则</font>
 
-### 只在最顶层使用 Hook
+### <font color=#a862ea>只在最顶层使用 Hook</font>
 
 **不要在循环，条件或嵌套函数中调用 Hook，** 确保总是在你的 React 函数的最顶层调用他们。
 
-### 只在 React 函数中调用 Hook
+### <font color=#a862ea>只在 React 函数中调用 Hook</font>
 
 **不要在普通的 JavaScript 函数中调用 Hook。**你可以：
 
 - ✅ 在 React 的函数组件中调用 Hook
 - ✅ 在自定义 Hook 中调用其他 Hook
 
-## 自定义 Hook
+## <font color=#a862ea>自定义 Hook</font>
 
 通过自定义 Hook，可以将组件逻辑提取到可重用的函数中。
 
-### 提取自定义 Hook
+### <font color=#a862ea>提取自定义 Hook</font>
 
 当我们想在两个函数之间共享逻辑时，我们会把它提取到第三个函数中。而组件和 Hook 都是函数，所以也同样适用这种方式。
 
@@ -286,7 +286,7 @@ function useFriendStatus(friendID) {  const [isOnline, setIsOnline] = useState(n
 }
 ```
 
-### 使用自定义 Hook
+### <font color=#a862ea>使用自定义 Hook</font>
 
 ```jsx
 function FriendStatus(props) {

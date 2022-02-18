@@ -14,8 +14,8 @@ tags:
 ---
 
 [demo](https://github.com/qianduanzhou/webpack-vue3)
-# 开始
-## 初始化
+# <font color=#a862ea>开始</font>
+## <font color=#a862ea>初始化</font>
 
 - npm init创建package.json
 - 然后安装webpack相关插件
@@ -55,7 +55,7 @@ module.exports = {
 
 
 
-## 安装vue相关依赖
+## <font color=#a862ea>安装vue相关依赖</font>
 
 - 安装vue相关依赖
 
@@ -91,7 +91,7 @@ import App from './App.vue'       // 测试文件 App.vue 和 用于挂载的ind
 createApp(App).mount('#app')
 ```
 
-## 安装css，sass相关依赖
+## <font color=#a862ea>安装css，sass相关依赖</font>
 
 - 安装
 
@@ -116,7 +116,7 @@ npm i css-loader style-loader sass sass-loader -D
     },
 ```
 
-## 使用模板
+## <font color=#a862ea>使用模板</font>
 
 - 安装
 
@@ -162,7 +162,7 @@ plugins: [
 </html>
 ```
 
-## 自动删除文件
+## <font color=#a862ea>自动删除文件</font>
 
 - 安装
 
@@ -179,7 +179,7 @@ plugins: [
 ]
 ```
 
-## 拷贝文件
+## <font color=#a862ea>拷贝文件</font>
 
 ```
 npm i copy-webpack-plugin --save-dev
@@ -199,7 +199,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
     ],
 ```
 
-## 搭建开发环境
+## <font color=#a862ea>搭建开发环境</font>
 
 拷贝一份webpack.config.js文件，命名为webpack.config.dev.js，删除拷贝插件相关的代码
 
@@ -223,23 +223,23 @@ npm i webpack-dev-server -D  //以file形式在浏览器打开打包后的文件
   },
 ```
 
-# 优化效率
+# <font color=#a862ea>优化效率</font>
 
-## 工具
+## <font color=#a862ea>工具</font>
 
 - [progress-bar-webpack-plugin](https://www.npmjs.com/package/progress-bar-webpack-plugin)：查看编译进度；
 - [speed-measure-webpack-plugin](https://www.npmjs.com/package/speed-measure-webpack-plugin)：查看编译速度；
 - [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack-bundle-analyzer)：打包体积分析。
 
-## 加快构建速度
+## <font color=#a862ea>加快构建速度</font>
 
-### 更新webpack版本为5
+### <font color=#a862ea>更新webpack版本为5</font>
 
-### 缓存
+### <font color=#a862ea>缓存</font>
 
-#### cache
+#### <font color=#a862ea>cache</font>
 
-通过配置 [webpack 持久化缓存](https://webpack.docschina.org/configuration/cache/#root) `cache: filesystem`，来缓存生成的 webpack 模块和 chunk，改善构建速度。
+通过配置 [webpack 持久化缓存](https://webpack.docschina.org/configuration/cache/#root) `cache: filesystem`，来缓存生成的 webpack 模块和 <font color=#a862ea>chunk，改善构建速度。</font>
 
 简单来说，通过 `cache: filesystem` 可以将构建过程的 webpack 模板进行缓存，大幅提升二次构建速度、打包速度，当构建突然中断，二次进行构建时，可以直接从缓存中拉取，可提速 **90%** 左右。
 
@@ -253,15 +253,15 @@ module.exports = {
 };
 ```
 
-### 减少 loader、plugins
+### <font color=#a862ea>减少 loader、plugins</font>
 
-#### 指定 include
+#### <font color=#a862ea>指定 include</font>
 
 为 loader 指定 include，减少 loader 应用范围，仅应用于最少数量的必要模块。
 
 rule.exclude 可以排除模块范围，也可用于减少 loader 应用范围.
 
-#### 管理资源
+#### <font color=#a862ea>管理资源</font>
 
 使用 [webpack 资源模块](https://webpack.docschina.org/guides/asset-modules/) (asset module) 代替旧的 assets loader（如  `file-loader`/`url-loader`/`raw-loader` 等），减少 loader 配置数量。
 
@@ -279,9 +279,9 @@ module.exports = {
 };
 ```
 
-### 优化 resolve 配置
+### <font color=#a862ea>优化 resolve 配置</font>
 
-#### alias
+#### <font color=#a862ea>alias</font>
 
 alias 可以创建  `import` 或  `require` 的别名，用来简化模块引入。
 
@@ -297,7 +297,7 @@ module.exports = {
 };
 ```
 
-#### extensions
+#### <font color=#a862ea>extensions</font>
 
 extensions 表示需要解析的文件类型列表。
 
@@ -315,11 +315,11 @@ module.exports = {
 };
 ```
 
-### 多进程
+### <font color=#a862ea>多进程</font>
 
-#### thread-loader
+#### <font color=#a862ea>thread-loader</font>
 
-通过 [thread-loader](https://webpack.docschina.org/loaders/thread-loader/#root) 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader 构建速度。
+通过 [thread-loader](https://webpack.docschina.org/loaders/thread-loader/#root) 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader <font color=#a862ea>构建速度。</font>
 
 安装：
 
@@ -358,11 +358,11 @@ module.exports = {
 };
 ```
 
-# 减小打包体积
+# <font color=#a862ea>减小打包体积</font>
 
-## 代码压缩
+## <font color=#a862ea>代码压缩</font>
 
-### JS 压缩
+### <font color=#a862ea>JS 压缩</font>
 
 使用  [TerserWebpackPlugin](https://webpack.docschina.org/plugins/terser-webpack-plugin/) 来压缩 JavaScript。
 
@@ -408,11 +408,11 @@ module.exports = {
 
 你可能有听过 ParallelUglifyPlugin 插件，它可以帮助我们多进程压缩 JS，webpack5 的 TerserWebpackPlugin 默认就开启了多进程和缓存，无需再引入 ParallelUglifyPlugin。
 
-### CSS 压缩
+### <font color=#a862ea>CSS 压缩</font>
 
-使用 [CssMinimizerWebpackPlugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 压缩 CSS 文件。
+使用 [CssMinimizerWebpackPlugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 压缩 CSS <font color=#a862ea>文件。</font>
 
-和 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 相比，[css-minimizer-webpack-plugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 在 source maps 和 assets 中使用查询字符串会更加准确，而且支持缓存和并发模式下运行。
+和 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 相比，[css-minimizer-webpack-plugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 在 source maps 和 assets <font color=#a862ea>中使用查询字符串会更加准确，而且支持缓存和并发模式下运行。</font>
 
 `CssMinimizerWebpackPlugin` 将在 Webpack 构建期间搜索 CSS 文件，优化、压缩 CSS。
 
@@ -438,11 +438,11 @@ module.exports = {
 };
 ```
 
-## 代码分离
+## <font color=#a862ea>代码分离</font>
 
 代码分离能够把代码分离到不同的 bundle 中，然后可以按需加载或并行加载这些文件。代码分离可以用于获取更小的 bundle，以及控制资源加载优先级，可以缩短页面加载时间。
 
-### 抽离重复代码
+### <font color=#a862ea>抽离重复代码</font>
 
 [SplitChunksPlugin](https://webpack.docschina.org/plugins/split-chunks-plugin) 插件开箱即用，可以将公共的依赖模块提取到已有的入口 chunk 中，或者提取到一个新生成的 chunk。
 
@@ -476,7 +476,7 @@ module.exports = {
 };
 ```
 
-### CSS 文件分离
+### <font color=#a862ea>CSS 文件分离</font>
 
 [MiniCssExtractPlugin](https://webpack.docschina.org/plugins/mini-css-extract-plugin/) 插件将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
 
@@ -517,7 +517,7 @@ module.exports = {
 
 **注意：MiniCssExtractPlugin.loader 要放在 style-loader 后面。**
 
-### 最小化 entry chunk
+### <font color=#a862ea>最小化 entry chunk</font>
 
 通过配置 `optimization.runtimeChunk = true`，为运行时代码创建一个额外的 chunk，减少 entry chunk 体积，提高性能。
 
@@ -532,11 +532,11 @@ module.exports = {
 }
 ```
 
-## Tree Shaking
+## <font color=#a862ea>Tree Shaking</font>
 
 摇树，顾名思义，就是将枯黄的落叶摇下来，只留下树上活的叶子。枯黄的落叶代表项目中未引用的无用代码，活的树叶代表项目中实际用到的源码。
 
-### JS
+### <font color=#a862ea>JS</font>
 
 [JS Tree Shaking](https://webpack.docschina.org/guides/tree-shaking/) 将 JavaScript 上下文中的未引用代码（Dead Code）移除，通过  `package.json` 的  `"sideEffects"` 属性作为标记，向 compiler 提供提示，表明项目中的哪些文件是 "pure(纯正 ES2015 模块)"，由此可以安全地删除文件中未使用的部分。
 
@@ -546,7 +546,7 @@ Dead Code 一般具有以下几个特征：
 - 代码执行的结果不会被用到；
 - 代码只会影响死变量（只写不读）。
 
-#### webpack5 sideEffects
+#### <font color=#a862ea>webpack5 sideEffects</font>
 
 通过 package.json 的  `"sideEffects"` 属性，来实现这种方式。
 
@@ -566,7 +566,7 @@ Dead Code 一般具有以下几个特征：
 }
 ```
 
-### CSS
+### <font color=#a862ea>CSS</font>
 
 上述对 JS 代码做了 Tree Shaking 操作，同样，CSS 代码也需要摇摇树，打包时把没有用的 CSS 代码摇走，可以大幅减少打包后的 CSS 文件大小。
 

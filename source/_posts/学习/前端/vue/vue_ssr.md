@@ -14,7 +14,7 @@ tags:
 - ssr
 ---
 
-## 背景
+## <font color=#a862ea>背景</font>
 
 ​		传统的 php，jsp，asp 等运行在服务端的语言，它们都是等服务器端把数据和模板转换成最终的 HTML 并返回客户端显示。而如今前端主流的框架如Vue，React，Angular等基本都是基于客户端渲染，它们所构建的单页应用（SPA）具有渲染性能好、可维护性高等优点。但是带来的缺点也是明显的，如首屏加载时间过长、不利于SEO。
 ​       单页应用使用JavaScript在客户端生成HTML来呈现内容，用户需要等待JS解析执行完成才能看到页面，这就使得首屏加载时间变长，影响用户体验。此外当搜索引擎爬取网站HTML文件时，单页应用的HTML没有内容，从而影响搜索排名。
@@ -22,7 +22,7 @@ tags:
 
 <!--more-->
 
-## vue服务端渲染方案
+## <font color=#a862ea>vue服务端渲染方案</font>
 
 - Nuxt.js
 
@@ -40,15 +40,15 @@ Nuxt.js 是一个基于 Vue.js 的通用应用框架。通过对客户端/服务
 
 [demo](https://github.com/qianduanzhou/vue-ssr)
 
-## 实现
+## <font color=#a862ea>实现</font>
 
-### Nuxt.js
+### <font color=#a862ea>Nuxt.js</font>
 
-#### 安装
+#### <font color=#a862ea>安装</font>
 
 通过npx create-nuxt-app <项目名> 创建一个nuxt应用程序。（npx 在 NPM 版本 5.2.0 默认安装了）
 
-#### 目录结构介绍
+#### <font color=#a862ea>目录结构介绍</font>
 
 这是最后生成的文件目录结构
 
@@ -79,11 +79,11 @@ layouts 目录中的每个文件 (顶级) 都将创建一个可通过页面组�
 Nuxt.js 允许你在运行 Vue.js 应用程序之前执行 js 插件。这在您需要使用自己的库或第三方模块时特别有用。
 使用方式：在plugins文件夹下创建一个模块js，如element-ui.js，然后再引入elementui并通过vue.use()方法注册，然后在nuxt.config.js中的plugins选项中加入该文件，由于是整个element引入，所以还得在css选项里加上element-ui的样式文件。这样我们就可以使用elementui的功能了。
 
-#### 路由
+#### <font color=#a862ea>路由</font>
 
 nuxt.js可以自动生成路由，也可以手动配置。
 
-##### 自动生成
+##### <font color=#a862ea>自动生成</font>
 
 可以根据nuxt的路由生成规则建立相应的文件结构，如下：
 
@@ -91,7 +91,7 @@ nuxt.js可以自动生成路由，也可以手动配置。
 
 {% asset_img 图片3.png %}
 
-##### 手动创建
+##### <font color=#a862ea>手动创建</font>
 
 我们也可以手动创建路由，主要用到router选项下的extendRoutes创建自定义路由。
 例如：新建一个router.js文件，在里面写入以下代码，然后在nuxt.config.js里引入并使用，最后生成的就是我们的自定义路由。
@@ -119,22 +119,22 @@ export function createRouter() {
 }
 ```
 
-#### 生命周期钩子
+#### <font color=#a862ea>生命周期钩子</font>
 
 nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期钩子，asyncData和fetch
 
-##### asyncData
+##### <font color=#a862ea>asyncData</font>
 
 - 这个钩子在客户端和服务端都会执行，它可以是异步的，并接收上下文作为参数。返回的对象将与data对象合并。由于这个方法是在组件初始化之前被调用的，所以无法通过this来使用组件的方法和属性。
 - 第一次加载页面时会先执行这个钩子，所有在这个时候不能使用document等客户端的对象和方法，否则会报错。由于除了页面刷新加载会执行这个钩子，在路由跳转或者组件生成时也会执行，所以需要通过process.server参数判断当前环境。
 - 在服务端调用时，即页面刷新时，会等待promise状态完成后才会继续执行接下来的生命周期钩子。
 
-##### fetch
+##### <font color=#a862ea>fetch</font>
 
 - 每次需要获取异步数据时都可以使用fetch。fetch在服务器端呈现路由时调用，在客户端导航时调用。
 - 在服务端调用时，即页面刷新时，会等待promise状态完成后才会继续执行接下来的生命周期钩子。
 
-##### 不同点
+##### <font color=#a862ea>不同点</font>
 
 你会发现这两者其实很相似，都可以同时在服务端和客户端执行，在服务端执行时也都是用于处理数据，但是他们还是有以下的不同点： 
 
@@ -142,11 +142,11 @@ nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期�
 - asyncData中无法使用组件的this，因为组件还未初始化完成，而fetch可以，更便于处理数据。
 - asyncData在服务端的执行时间在fetch和created之前，fetch在created之后，在客户端执行时asyncData依旧是排第一位，而fetch在beforeMount之后执行
 
-#### 其他
+#### <font color=#a862ea>其他</font>
 
 除了以上讲的基础内容，还有一些其他内容，如自定义模块，路由动画和一些配置相关的就不细讲啦。
 
-### 脚手架搭建
+### <font color=#a862ea>脚手架搭建</font>
 
 在开始之前，首先需要准备的条件有：
 
@@ -157,7 +157,7 @@ nuxt.js除了常见的vue生命周期外，还有多出来的两个生命周期�
 - express
 - webpack及相关插件
 
-#### 起步
+#### <font color=#a862ea>起步</font>
 
 - 我们可以新建一个文件夹如vue-ssr,然后打开终端执行npm init生成package.json文件
 - 然后先安装vue与vue-server-renderer和express进行测试（npm install vue vue-server-renderer express --save）
@@ -257,7 +257,7 @@ server.get('*', (req, res) => {
 server.listen(8080)
 ```
 
-#### 编写通用代码
+#### <font color=#a862ea>编写通用代码</font>
 
 因为我们的程序是要同时运行在客户端和服务端上的，所以要做好区分，因为有些全局变量只能在服务端或者客户端使用，如window、document只能在客户端使用。
 因此我们可以创建两个不同的js文件，分别处理不同端的情况。
@@ -302,7 +302,7 @@ export default context => {
 }
 ```
 
-#### 路由与代码分割
+#### <font color=#a862ea>路由与代码分割</font>
 
 - 使用 vue-router 的路由
 
@@ -380,7 +380,7 @@ router.onReady(() => {
 ))
 ```
 
-#### 数据预取存储容器
+#### <font color=#a862ea>数据预取存储容器</font>
 
 在服务器端渲染(SSR)期间，所以如果应用程序依赖于一些异步数据，那么在开始渲染过程之前，需要先预取和解析好这些数据。因为客户端和服务端需要获取到完全相同的数据，所以我们可以使用vuex进行数据的存取来保证数据的一致性。
 
@@ -488,7 +488,7 @@ Vue.mixin((
 ))
 ```
 
-#### 客户端激活
+#### <font color=#a862ea>客户端激活</font>
 
 所谓客户端激活，指的是 Vue 在浏览器端接管由服务端发送的静态 HTML，使其变为由 Vue 管理的动态 DOM 的过程。
 由于服务器已经渲染好了 HTML，我们显然无需将其丢弃再重新创建所有的 DOM 元素。相反，我们需要"激活"这些静态的 HTML，然后使他们成为动态的（能够响应后续的数据变化）。
@@ -503,10 +503,10 @@ data-server-rendered 特殊属性，让客户端 Vue 知道这部分 HTML 是由
 注意，在没有 data-server-rendered 属性的元素上，还可以向 $mount 函数的 hydrating 参数位置传入 true，来强制使用激活模式(hydration)：
 
 ```js
-app.$mount('#app', true)
+app.$mount('#app', <font color=#a862ea>true)</font>
 ```
 
-#### 构建配置
+#### <font color=#a862ea>构建配置</font>
 
 在完成两个入口的配置后，接下来就开始用webpack搭建基础框架了。服务器端渲染 (SSR) 项目的配置大体上与纯客户端项目类似，但是我们建议将配置分为三个文件：base, client 和 server。基本配置 (base config) 包含在两个环境共享的配置，例如，输出路径 (output path)，别名 (alias) 和 loader。服务器配置 (server config) 和客户端配置 (client config)，可以通过使用 webpack-merge 来简单地扩展基本配置。
 
@@ -721,7 +721,7 @@ module.exports = merge(baseConfig, {
 })
 ```
 
-#### 配置开发环境
+#### <font color=#a862ea>配置开发环境</font>
 
 因为现在这个脚手架如果代码有改动，每次都需要重新build一遍，然后再start，开发起来比较麻烦，所有我们要配置下开发环境，使用热重载。
 
@@ -952,7 +952,7 @@ app.listen(8080, () => {
 })
 ```
 
-#### 配置启动参数
+#### <font color=#a862ea>配置启动参数</font>
 
 在项目根目录package.json中的srcipt参数中增加如下参数：
 
@@ -984,6 +984,6 @@ app.listen(8080, () => {
 
 其他命令都是些优化和分析相关
 
-## 总结
+## <font color=#a862ea>总结</font>
 
 该文章介绍了服务端渲染的优势及vue服务端渲染（SSR）的方案，因为我们现在前端开发大多数接触的都是客户端渲染，往往忽略了一些其他的方案，如服务端渲染（SSR）和静态网站渲染（SSG）。通过这次分享可以了解vue服务端渲染的两个基本实现方法，nuxt.js和脚手架搭建，其中nuxt.js功能更加全面，开发成本低，不过可定制性较差，而自己搭建脚手架开发成本会高很多，但是可以根据自己的需求定制。对于已经开发完成的项目推荐在当前开发框架上修改，而对于新开发的项目，使用nuxt.js可能是最好的方式。

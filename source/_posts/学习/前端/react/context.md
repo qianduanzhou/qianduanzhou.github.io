@@ -15,11 +15,11 @@ tags:
 由于react的数据是通过 props 属性自上而下（由父及子）进行传递的，但当组件层级过深或者过广时，这样的方式就很繁琐了。
 <!--more-->
 
-## 何时使用 Context
+## <font color=#a862ea>何时使用 Context</font>
 
 当组件层级过深或者过广时。如*很多*不同层级的组件需要访问同样一些的数据。
 
-## 使用 Context 之前的考虑
+## <font color=#a862ea>使用 Context 之前的考虑</font>
 
 Context 主要应用场景在于*很多*不同层级的组件需要访问同样一些的数据。请谨慎使用，因为这会使得组件的复用性变差。
 
@@ -68,9 +68,9 @@ function Page(props) {
 
 这种变化下，只有最顶部的 Page 组件需要知道 `Link` 和 `Avatar` 组件是如何使用 `user` 和 `avatarSize` 的。
 
-## API
+## <font color=#a862ea>API</font>
 
-### `React.createContext`
+### <font color=#a862ea>`React.createContext`</font>
 
 ```jsx
 const MyContext = React.createContext(defaultValue);
@@ -80,7 +80,7 @@ const MyContext = React.createContext(defaultValue);
 
 **只有**当组件所处的树中没有匹配到 Provider 时，其 `defaultValue` 参数才会生效。这有助于在不使用 Provider 包装组件的情况下对组件进行测试。注意：将 `undefined` 传递给 Provider 的 value 时，消费组件的 `defaultValue` 不会生效。
 
-### `Context.Provider`
+### <font color=#a862ea>`Context.Provider`</font>
 
 ```jsx
 <MyContext.Provider value={/* 某个值 */}>
@@ -92,7 +92,7 @@ Provider 接收一个 `value` 属性，传递给消费组件。一个 Provider �
 
 当 Provider 的 `value` 值发生变化时，它内部的所有消费组件都会重新渲染。Provider 及其内部 consumer 组件都不受制于 `shouldComponentUpdate` 函数，因此当 consumer 组件在其祖先组件退出更新的情况下也能更新。
 
-### `Class.contextType`
+### <font color=#a862ea>`Class.contextType`</font>
 
 ```jsx
 class MyClass extends React.Component {
@@ -130,7 +130,7 @@ class MyClass extends React.Component {
 }
 ```
 
-### `Context.Consumer`
+### <font color=#a862ea>`Context.Consumer`</font>
 
 ```jsx
 <MyContext.Consumer>
@@ -138,7 +138,7 @@ class MyClass extends React.Component {
 </MyContext.Consumer>
 ```
 
-### `Context.displayName`
+### <font color=#a862ea>`Context.displayName`</font>
 
 context 对象接受一个名为 `displayName` 的 property，类型为字符串。React DevTools 使用该字符串来确定 context 要显示的内容。
 

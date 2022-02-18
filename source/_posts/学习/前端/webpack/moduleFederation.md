@@ -14,14 +14,14 @@ tags:
 
 [demo](https://github.com/qianduanzhou/moduleFederation-study)
 
-## 介绍
+## <font color=#a862ea>介绍</font>
 [官网](https://webpack.docschina.org/concepts/module-federation/)
 多个独立的构建可以组成一个应用程序，这些独立的构建之间不应该存在依赖关系，因此可以单独开发和部署它们。
 这通常被称作微前端，但并不仅限于此。
 简单来说就是可以实现不同环境下的组件数据互通。
 <!--more-->
-## webpack5模块联邦测试
-### appA 子容器
+## <font color=#a862ea>webpack5模块联邦测试</font>
+### <font color=#a862ea>appA 子容器</font>
 ``` javascript
 //appA/build/webpack.config.js
 const path = require('path');
@@ -48,7 +48,7 @@ module.exports = {
     ],
 };
 ```
-### appB 父容器
+### <font color=#a862ea>appB 父容器</font>
 ``` javascript
 //appB/build/webpack.config.js
 const path = require('path');
@@ -73,4 +73,4 @@ module.exports = {
     ],
 };
 ```
-### appB B中引用了A的button组件
+### <font color=#a862ea>appB B中引用了A的button组件</font>

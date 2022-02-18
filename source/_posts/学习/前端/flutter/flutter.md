@@ -10,5 +10,5 @@ categories:
 - 前端
 tags: flutter
 ---
-## 一个简单的app
+## <font color=#a862ea>一个简单的app</font>
 [简单的flutter应用](https://github.com/qianduanzhou/flutter_myapp)

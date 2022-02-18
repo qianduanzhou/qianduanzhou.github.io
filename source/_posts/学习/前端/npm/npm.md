@@ -10,7 +10,7 @@ categories:
 - 前端
 tags: npm
 ---
-### npm发布包相关操作
+### <font color=#a862ea>npm发布包相关操作</font>
 <!--more-->
 **登录：**npm login
 

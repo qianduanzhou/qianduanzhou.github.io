@@ -11,6 +11,6 @@ categories:
 tags: 
 - typeScript
 ---
-### 对应demo
+### <font color=#a862ea>对应demo</font>
 
 [ts语法学习](https://github.com/qianduanzhou/ts-grammar-学习)

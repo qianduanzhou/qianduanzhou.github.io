@@ -13,7 +13,7 @@ tags:
 - vite
 - typeScript
 ---
-## 总览
+## <font color=#a862ea>总览</font>
 
 [demo地址](https://github.com/qianduanzhou/vite-vue)
 
@@ -21,21 +21,21 @@ tags:
 
 {% asset_img vite_vue.png 功能脑图 %}
 
-## 开始
+## <font color=#a862ea>开始</font>
 
-### 初始化
+### <font color=#a862ea>初始化</font>
 
 ```
 npm init vite@latest my-vue-app 初始化一个项目，期间可以选中相应框架及语法
 ```
 
-### 启动
+### <font color=#a862ea>启动</font>
 
 接着我们打开安装的目录，使用npm install安装相关依赖。之后只用npm run dev即可运行。
 
 {% asset_img 图片1.png %}
 
-## 安装库
+## <font color=#a862ea>安装库</font>
 
 安装下面相关的库，注意版本问题
 
@@ -48,7 +48,7 @@ npm init vite@latest my-vue-app 初始化一个项目，期间可以选中相应
 - postcss-pxtorem（安装postcss-pxtorem转换px为rem，适配移动端）
 - normalize.css（引入normalize.css初始化css）
 
-## 配置
+## <font color=#a862ea>配置</font>
 
 在vite.config.ts和tsconfig.json里进行基础路径,别名及跨域等配置。
 
@@ -122,9 +122,9 @@ export default defineConfig(({mode}) => {
 
 
 
-## 工具函数与类
+## <font color=#a862ea>工具函数与类</font>
 
-### 缓存桶
+### <font color=#a862ea>缓存桶</font>
 
 提高移动端下拉列表的用户体验。将数据先缓存起来，下拉到底的时候先拿缓存的数据，期间判断并请求接口，用户几乎感知不到卡顿。
 
@@ -248,7 +248,7 @@ class CacheBucket {
 export default CacheBucket
 ```
 
-### 图片懒加载
+### <font color=#a862ea>图片懒加载</font>
 
 图片出现在视图内才进行请求，节约资源。
 
@@ -286,13 +286,13 @@ class ImgLazyLoad {
 export default ImgLazyLoad
 ```
 
-## 构建和部署
+## <font color=#a862ea>构建和部署</font>
 
-### 构建
+### <font color=#a862ea>构建</font>
 
 使用npm run build和npm run build-test分别构建测试和正式包。
 
-### 部署
+### <font color=#a862ea>部署</font>
 
 编写Dockerfile，使用docker部署：
 
@@ -302,6 +302,6 @@ MAINTAINER zhou
 COPY dist/  /usr/share/nginx/html/ 
 ```
 
-## 总结
+## <font color=#a862ea>总结</font>
 
 vite搭建的vue3版本的h5移动端框架，使用了vue全家桶及element ui库，并配置了一些实用的工具函数，可以完成项目开发的基本需求。

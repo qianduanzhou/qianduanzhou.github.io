@@ -12,7 +12,7 @@ tags:
 - vue
 ---
 
-### 介绍
+### <font color=#a862ea>介绍</font>
 **1、init 阶段：** VUE 的 data的属性都会被reactive化，也就是加上 setter/getter函数。
 
 ```js
@@ -148,7 +148,7 @@ notify () {
 
 由此图我们可以看出Watcher是连接VUE component 跟 data属性的桥梁。
 
-### 总结
+### <font color=#a862ea>总结</font>
 
 最后，我们通过解释官方的图来做个总结。
 
