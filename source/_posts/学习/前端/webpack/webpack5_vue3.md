@@ -319,7 +319,7 @@ module.exports = {
 
 #### <font color=#a862ea>thread-loader</font>
 
-通过 [thread-loader](https://webpack.docschina.org/loaders/thread-loader/#root) 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader <font color=#a862ea>构建速度。</font>
+通过 [thread-loader](https://webpack.docschina.org/loaders/thread-loader/#root) 将耗时的 loader 放在一个独立的 worker 池中运行，加快 loader 构建速度。
 
 安装：
 
@@ -410,9 +410,9 @@ module.exports = {
 
 ### <font color=#a862ea>CSS 压缩</font>
 
-使用 [CssMinimizerWebpackPlugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 压缩 CSS <font color=#a862ea>文件。</font>
+使用 [CssMinimizerWebpackPlugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 压缩 CSS 文件。
 
-和 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 相比，[css-minimizer-webpack-plugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 在 source maps 和 assets <font color=#a862ea>中使用查询字符串会更加准确，而且支持缓存和并发模式下运行。</font>
+和 [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin) 相比，[css-minimizer-webpack-plugin](https://webpack.docschina.org/plugins/css-minimizer-webpack-plugin/#root) 在 source maps 和 assets 中使用查询字符串会更加准确，而且支持缓存和并发模式下运行。
 
 `CssMinimizerWebpackPlugin` 将在 Webpack 构建期间搜索 CSS 文件，优化、压缩 CSS。
 
