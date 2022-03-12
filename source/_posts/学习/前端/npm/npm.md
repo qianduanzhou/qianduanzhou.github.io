@@ -14,9 +14,9 @@ tags: npm
 <!--more-->
 **登录：**npm login
 
-**发布：**npm publish
+**发布及更新：**npm publish
 
-**更新：**npm version patch   npm publish
+**更新某个版本：**npm version patch   npm publish
 
 **删除版本：**npm unpublish 包名@版本号
 
