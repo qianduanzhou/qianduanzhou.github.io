@@ -16,7 +16,11 @@ tags: npm
 
 **发布及更新：**npm publish
 
-**更新某个版本：**npm version patch   npm publish
+**更新版本：**执行以下命令后 npm publish
+
+- npm version patch作用将修订号增加1，也就是版本号最后一位
+- npm version minor将次版本号增加1，也就是中间那一位
+- npm version major将主版本号增加1，也就是第一位
 
 **删除版本：**npm unpublish 包名@版本号
 
