@@ -32,13 +32,13 @@ toc: true
 3. 最后则是编写构建栏的代码，可以选择执行shell，并输入以下命令。
 
 ```shell
-npm install --registry=https://registry.npm.taobao.org
-export CI=false
-npm run build
-docker build -t nginx/react:v1.1.0 .
-[ "$(docker ps | grep three-shopping-mall)" ] && docker kill -s KILL three-shopping-mall
-[ "$(docker ps -a | grep three-shopping-mall)" ] && docker rm three-shopping-mall
-docker run -d -p 9030:80 --name three-shopping-mall nginx/react:v1.1.0
+npm install --registry=https://registry.npm.taobao.org #使用淘宝镜像
+export CI=false #防止CI报错
+npm run build #执行打包命令
+docker build -t nginx/react:v1.1.0 . #根据dockerfile生成镜像
+[ "$(docker ps | grep three-shopping-mall)" ] && docker kill -s KILL three-shopping-mall #如果容器处于运行状态则清除
+[ "$(docker ps -a | grep three-shopping-mall)" ] && docker rm three-shopping-mall #如果容器存在则移除
+docker run -d -p 8030:80 --name three-shopping-mall nginx/react:v1.1.0 #生成容器
 ```
 
 {% asset_img 构建.png %}
