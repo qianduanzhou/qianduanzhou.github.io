@@ -2,6 +2,7 @@
 title: Web Workers
 cover: /img/thumbnail/学习/前端/javaScript/js.png
 thumbnail: /img/thumbnail/学习/前端/javaScript/js.png
+date: 2022-03-15 20:13:50
 toc: true
 categories: 
 - 学习
