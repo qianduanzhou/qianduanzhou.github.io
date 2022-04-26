@@ -9,7 +9,7 @@ tags:
 toc: true
 ---
 
-## node插件
+## <font color=#a862ea>node插件</font>
 
 1. 首先需要在Jenkins里安装node插件，然后配置，在系统管理里面的插件管理搜索node，然后安装并重启
 
@@ -23,7 +23,7 @@ toc: true
 
 {% asset_img 构建配置.png %}
 
-## 任务配置
+## <font color=#a862ea>任务配置</font>
 
 在新建的任务中进行相关配置。
 
@@ -65,7 +65,7 @@ swapoff /data/swapfile
 rm /data/swapfile -rf
 ```
 
-## 项目相关配置
+## <font color=#a862ea>项目相关配置</font>
 
 由于使用到docker，需要在项目下创建Dockerfile如下：
 
