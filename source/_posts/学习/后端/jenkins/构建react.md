@@ -53,7 +53,12 @@ free -h
 dd if=/dev/zero of=/data/swapfile bs=1M count=1024 
 #设置交换文件；
 mkswap /data/swapfile
-#启用：swapon /data/swapfile
+#启用：
+swapon /data/swapfile
+#设置开机自动挂载
+vim /etc/fstab
+#然后在最后一行输入
+/data/swapfile swap swap defaults 0 0
 ```
 
 其他命令
