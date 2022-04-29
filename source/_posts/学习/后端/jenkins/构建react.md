@@ -6,6 +6,7 @@ thumbnail: /img/thumbnail/学习/后端/jenkins/jenkins.png
 tags:
 - jenkins
 - react
+- docker
 toc: true
 ---
 
