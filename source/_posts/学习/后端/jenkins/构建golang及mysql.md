@@ -41,7 +41,8 @@ services:
     network_mode: "test-net"
     depends_on:
       - mysql
-    command: ["./wait-for-it", "mysql:3307", "--", "./beego_test"]
+    restart: on-failure
+    command: ["./wait-for-it", "-t", "30", "mysql:3307", "--", "./beego_test"]
   mysql:
     build: ./docker/mysql
     container_name: "mydb_test"
@@ -70,6 +71,7 @@ RUN mkdir -p $GO_PATH
 WORKDIR $GO_PATH
  
 #安装netcat wait-for依赖nc命令
+RUN sed -i s@/deb.debian.org/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 RUN apt-get -q update
 RUN apt-get -qy install netcat
 
