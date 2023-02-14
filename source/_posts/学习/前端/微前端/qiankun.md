@@ -19,7 +19,7 @@ qiankun 是一个基于 [single-spa](https://github.com/CanopyTax/single-spa) �
 
 <!--more-->
 
-## 特性
+## <font color=#a862ea>特性</font>
 
 - 📦 **基于 [single-spa](https://github.com/CanopyTax/single-spa)** 封装，提供了更加开箱即用的 API。
 - 📱 **技术栈无关**，任意技术栈的应用均可 使用/接入，不论是 React/Vue/Angular/JQuery 还是其他等框架。
@@ -29,19 +29,19 @@ qiankun 是一个基于 [single-spa](https://github.com/CanopyTax/single-spa) �
 - ⚡️ **资源预加载**，在浏览器空闲时间预加载未打开的微应用资源，加速微应用打开速度。
 - 🔌 **umi 插件**，提供了 [@umijs/plugin-qiankun](https://github.com/umijs/plugins/tree/master/packages/plugin-qiankun) 供 umi 应用一键切换成微前端架构系统。
 
-## 使用
+## <font color=#a862ea>使用</font>
 
 qiankun应用分成主应用和微应用，通过主应用可以控制微应用及主微应用之间的数据传递。
 
 本项目主应用是vite搭建的vue3，微应用是react和vue2。
 
-### 安装
+### <font color=#a862ea>安装</font>
 
 ```shell
 yarn add qiankun # 或者 npm i qiankun -S
 ```
 
-### 在主应用中注册微应用
+### <font color=#a862ea>在主应用中注册微应用</font>
 
 1. 在main.ts中注册微应用
 
@@ -144,7 +144,7 @@ export default {
 
 这样一来主应用的配置就基本完成了。
 
-### react微应用
+### <font color=#a862ea>react微应用</font>
 
 可以通过[官网](https://qiankun.umijs.org/zh/guide/tutorial#react-%E5%BE%AE%E5%BA%94%E7%94%A8)的方式创建（推荐）。
 
@@ -247,18 +247,18 @@ module.exports = function (proxy, allowedHost) {
 
 基本配置差不多了，其他就是一些兼容，如\__POWERED_BY_QIANKUN__变量需要在src/react-app-env.d.ts中声明。还有就是一些路径的适配，如public下的文件由于没有通过webpack打包，所以在代码中使用的时候需要判断路径。
 
-### vue微应用
+### <font color=#a862ea>vue微应用</font>
 
 vue微应用和react也是类似，修改相关配置，暴露出生命周期钩子。
 
 详细可以看[官网](https://qiankun.umijs.org/zh/guide/tutorial#vue-%E5%BE%AE%E5%BA%94%E7%94%A8)。
 
-## 最终效果
+## <font color=#a862ea>最终效果</font>
 
 {% asset_img vue.png %}
 
 {% asset_img react.png %}
 
-## 总结
+## <font color=#a862ea>总结</font>
 
 以上就是qiankun的基本使用，当然qiankun还有更多用法，比如不通过路由控制（registerMicroApps）微应用，直接手动方式控制（loadMicroApp）等等。

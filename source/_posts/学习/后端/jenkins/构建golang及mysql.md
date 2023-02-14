@@ -12,7 +12,7 @@ tags:
 
 ## <font color=#a862ea>简介</font>
 
-这是一个简单的通过jenkins构建golang接口的教程，前提是在安装完[jenkins](http://www.zhouhongbin.work/2022/04/25/%E5%AD%A6%E4%B9%A0/%E5%90%8E%E7%AB%AF/jenkins/%E5%AE%89%E8%A3%85/)及[docker](http://www.zhouhongbin.work/2021/12/15/%E5%AD%A6%E4%B9%A0/%E5%90%8E%E7%AB%AF/docker/study/)后。
+这是一个简单的通过jenkins构建golang接口的教程，前提是在安装完[jenkins](http://http://175.178.107.242/2022/04/25/%E5%AD%A6%E4%B9%A0/%E5%90%8E%E7%AB%AF/jenkins/%E5%AE%89%E8%A3%85/)及[docker](http://http://175.178.107.242/2021/12/15/%E5%AD%A6%E4%B9%A0/%E5%90%8E%E7%AB%AF/docker/study/)后。
 
 [项目地址](https://github.com/qianduanzhou/beego_study)
 
