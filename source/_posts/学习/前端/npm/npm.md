@@ -10,6 +10,8 @@ categories:
 - 前端
 tags: npm
 ---
+
+[官网](https://www.npmjs.com/)
 ### <font color=#a862ea>npm发布包相关操作</font>
 <!--more-->
 **登录：**npm login
