@@ -62,7 +62,7 @@ ignore: null
 theme: icarus
 deploy:
   type: git
-  repo: git@175.178.107.242:/home/git/blog.git
+  repo: https://github.com/qianduanzhou/zhb_blog.github.io.git
   branch: master
 ## Live2D看板娘
 live2d:
