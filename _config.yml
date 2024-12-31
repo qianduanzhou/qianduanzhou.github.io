@@ -5,7 +5,7 @@ keywords: 前端、后端、学习
 author: zhb
 language: zh-CN
 timezone: ''
-url: http://175.178.107.242
+url: https://github.com/qianduanzhou/qianduanzhou.github.io.git
 permalink: ':year/:month/:day/:title/'
 permalink_defaults: null
 pretty_urls:
@@ -62,7 +62,7 @@ ignore: null
 theme: icarus
 deploy:
   type: git
-  repo: https://github.com/qianduanzhou/zhb_blog.github.io.git
+  repo: https://github.com/qianduanzhou/qianduanzhou.github.io.git
   branch: master
 ## Live2D看板娘
 live2d:
